@@ -23,7 +23,8 @@ body {
 /*****Text styles*****/
 /*Headings*/
 h1 {
-  margin-bottom: 0;
+  margin: 0;
+  font-size: 2em;
 }
 
 /*Clickable*/
@@ -69,13 +70,16 @@ button:active{
 nav {
   padding: 15px;
   border-bottom: 1px solid #707070;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 /*****Sections*****/
 section {
   display: flex;
   flex-direction: column;
+
+  max-width: 80%;
+  margin: 0 auto;
 }
 
 /*****Start*****/
@@ -84,8 +88,66 @@ section {
   text-align: center;
 }
 
+/*****Quiz-questions*****/
+#quiz-questions > p{
+  text-align: center;
+}
+#timer {
+  border-bottom: 1px solid #707070;
+  padding-bottom: 15px;
 
-/*input*/
+  font-size: 1.35em;
+  font-weight: bold;
+}
+#time-remaining{
+  color: #4616E8;
+  font-size: 1.4em;
+}
+
+/*when an incorrect answer is entered*/
+.flash-red {
+  animation-name: flashRed;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+}
+
+@keyframes flashRed {
+  0% {color: #4616E8;}
+  25% {color: #E81648;}
+  75% {color: #E81648;}
+  100% {color: #4616E8;}
+}
+
+#answer-status {
+  border-top: 1px solid #707070;
+  padding-top: 15px;
+
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #E81648;
+}
+
+.fas {
+  margin-right: 10px;
+}
+
+/*****End*****/
+#score-text {
+  font-size: 1.2em;
+}
+
+#score {
+  font-weight: bold;
+  color: #4616E8;
+}
+
+/*form*/
+form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
 #initials {
   padding: 3px;
   font-size: 1em;
