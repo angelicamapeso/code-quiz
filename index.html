@@ -9,21 +9,35 @@
   </head>
   <body>
     <header>
-      <!--View Highscores-->
-      <!--Timer-->
+      <nav>
+        <a href="highscores.html">View Highscores</a>
+      </nav>
     </header>
     <main>
-      <!--Starting State-->
-        <!--Quiz Title-->
-        <!--Text-->
-        <!--Button-->
-      <!--Quiz State-->
-        <!--List of options-->
-      <!--End of Game-->
-        <!--TItle-->
-        <!--Text-->
-        <!--Input Field-->
-        <!--Submit-->
+      <section id="start">
+        <h1>Coding Quiz Challenge</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+          Mollitia eum voluptatem velit enim, nostrum temporibus eligendi ipsa commodi veritatis, 
+          aperiam natus blanditiis praesentium voluptatum et explicabo alias harum. Maiores, 
+          accusamus.
+        </p>
+        <button>Start Quiz</button>
+      </section>
+      <section id="quiz-questions">
+        <p>Time: <span id="timer">0</span></p>
+        <h1>Quiz Question</h1>
+        <ul id="answer"></ul>
+        <p id="answer-status"></p>
+      </section>
+      <section id="end">
+        <h1>All done!</h1>
+        <p>Your score is: <span id="score"></span></p>
+        <form>
+          <label for="initials">Enter initials:</label>
+          <input type="text" id="initials">
+          <button id="submit-score">Submit</button>
+        </form>
+      </section>
     </main>
   </body>
 </html>
