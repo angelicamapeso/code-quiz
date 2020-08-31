@@ -16,7 +16,6 @@ body {
   color: #202020;
   
   box-sizing: border-box;
-  width: 100%;
   margin: 0; 
 }
 
@@ -89,9 +88,14 @@ main {
 }
 
 /*****Quiz-questions*****/
+#quiz-questions > h1 {
+  font-size: 1.5em;
+}
+
 #quiz-questions > p{
   text-align: center;
 }
+
 #timer {
   border-bottom: 1px solid #707070;
   padding-bottom: 15px;
@@ -99,6 +103,7 @@ main {
   font-size: 1.35em;
   font-weight: bold;
 }
+
 #time-remaining{
   color: #4616E8;
   font-size: 1.4em;
@@ -187,4 +192,17 @@ td:first-child {
 th:last-child,
 td:last-child  {
   text-align: right;
+}
+
+/*****Breakpoints*****/
+@media only screen and (min-width: 992px) {
+  main {
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  main {
+    width: 40%;
+  }
 }
