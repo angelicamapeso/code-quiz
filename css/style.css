@@ -1,0 +1,17 @@
+/*Colors 
+Red: #E81648;
+Gray: #707070;
+Off-white: #EBEBEB;
+Black: #202020;
+Purple: #4616E8;
+Dark purple: #27126F;
+*/
+
+/*General styles*/
+body {
+  /*System fonts*/
+  font-family: -apple-system, BlinkMacSystemFont,
+    “Segoe UI”, “Roboto”, “Oxygen”, “Ubuntu”, “Cantarell”,
+    “Fira Sans”, “Droid Sans”, “Helvetica Neue”,
+    sans-serif;
+}
