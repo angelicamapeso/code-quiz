@@ -66,6 +66,10 @@ button:active{
   background-color: #27126F;
 }
 
+.hidden {
+  display: none;
+}
+
 /*****Nav*****/
 nav {
   padding: 15px;
