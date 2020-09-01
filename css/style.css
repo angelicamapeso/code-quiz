@@ -109,7 +109,8 @@ main {
   font-size: 1.5em;
 }
 
-#quiz-questions > p{
+#timer, 
+.choice-status {
   text-align: center;
 }
 
