@@ -1,6 +1,6 @@
 /*Colors 
 Red: #E81648;
-Gray: #707070;
+Light Gray: #CECECE;
 Black: #202020;
 Purple: #4616E8;
 Dark purple: #27126F;
@@ -84,7 +84,7 @@ button:active{
 /*****Nav*****/
 nav {
   padding: 15px;
-  border-bottom: 1px solid #707070;
+  border-bottom: 1px solid #CECECE;
 }
 
 /*****Sections*****/
@@ -114,7 +114,7 @@ main {
 }
 
 #timer {
-  border-bottom: 1px solid #707070;
+  border-bottom: 1px solid #CECECE;
   padding-bottom: 15px;
 
   font-size: 1.35em;
@@ -141,7 +141,7 @@ main {
 }
 
 #answer-status {
-  border-top: 1px solid #707070;
+  border-top: 1px solid #CECECE;
   padding-top: 15px;
 
   font-size: 1.5em;
@@ -194,7 +194,7 @@ td, th {
 }
 
 th {
-  border-bottom: 1px solid #707070;
+  border-bottom: 1px solid #CECECE;
 }
 
 td {
