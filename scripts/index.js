@@ -16,6 +16,7 @@ const WRONG = document.getElementById("wrong");
 
 //End
 const END_SECTION = document.getElementById("end");
+const END_TITLE = document.getElementById("end-title");
 const SCORE = document.getElementById("score");
 const INITIALS_INPUT = document.getElementById("initials");
 const SUBMIT_SCORE_BTN = document.getElementById("submit-score");
@@ -57,13 +58,17 @@ START_BTN.addEventListener('click', function() {
   timeInterval = setInterval(function() {
     totalTime--;
     displayTime();
+    checkTime();
 
-    if (totalTime === 0) {
-      clearInterval(timeInterval);
-      showElement(SECTION_LIST, END_SECTION);
-    }
   }, 1000);
 });
+
+function checkTime() {
+  if (totalTime <= 0) {
+    totalTime = 0;
+    endGame();
+  }
+}
 
 function showElement(siblingList, showElement) {
   for (element of siblingList) {
@@ -95,9 +100,11 @@ function displayQuestion() {
 
 CHOICES.addEventListener('click', function(event) {
   clearTimeout(statusTimer);
+  TIME_REMAINING.style.color = "#4616E8";
 
   if (event.target.parentElement.dataset.index != QUESTION_LIST[currentQuestion].indexOfCorrectChoice) {
     totalTime -= 10;
+    checkTime();
     displayTime();
 
     TIME_REMAINING.style.color = "#E81648";
@@ -122,12 +129,22 @@ CHOICES.addEventListener('click', function(event) {
   currentQuestion++;
   if (currentQuestion >= QUESTION_LIST.length) {
     clearInterval(timeInterval);
-    showElement(SECTION_LIST, END_SECTION);
+    endGame();
   } else {
     displayQuestion();
   }
 });
 
+function endGame() {
+  showElement(SECTION_LIST, END_SECTION);
+  SCORE.textContent = totalTime;
+
+  if (currentQuestion < QUESTION_LIST.length && totalTime === 0) {
+    END_TITLE.textContent = "Sorry! You ran out of time!";
+  } else {
+    END_TITLE.textContent = "Congratulations! You answered all the questions before your time ran out!";
+  }
+}
 //if user makes it to end of questions with time left
 //or user runs out of time
   //allow user to enter initials and save their remaining time as score
