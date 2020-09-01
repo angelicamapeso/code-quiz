@@ -139,17 +139,13 @@ function endGame() {
   showElement(SECTION_LIST, END_SECTION);
   SCORE.textContent = totalTime;
 
-  if (currentQuestion < QUESTION_LIST.length && totalTime === 0) {
+  if (totalTime === 0) {
     END_TITLE.textContent = "Sorry! You ran out of time!";
   } else {
     END_TITLE.textContent = "Congratulations! You answered all the questions before your time ran out!";
   }
 }
-//if user makes it to end of questions with time left
-//or user runs out of time
-  //allow user to enter initials and save their remaining time as score
-  //save this to local storage
-  //redirect to highscores page
+
 
 
 
