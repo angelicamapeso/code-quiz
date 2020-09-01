@@ -65,6 +65,7 @@ START_BTN.addEventListener('click', function() {
 
 function checkTime() {
   if (totalTime <= 0) {
+    clearInterval(timeInterval);
     totalTime = 0;
     endGame();
   }
