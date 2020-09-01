@@ -1,3 +1,6 @@
+//Section list
+const SECTION_LIST = document.querySelectorAll("section");
+
 //Start
 const START_SECTION = document.getElementById("start");
 const START_BTN = document.getElementById("start-button");
@@ -7,8 +10,9 @@ const QUIZ_SECTION = document.getElementById("quiz-questions");
 const TIME_REMAINING = document.getElementById("time-remaining");
 const QUESTION = document.getElementById("question");
 const CHOICES = document.getElementById("choices");
-const CHOICE_STATUS = document.getElementById("choice-status");
-const STATUS_ICON = document.getElementById("status-icon");
+const STATUS_LIST = document.querySelectorAll(".choice-status");
+const CORRECT = document.getElementById("correct");
+const WRONG = document.getElementById("wrong");
 
 //End
 const END_SECTION = document.getElementById("end");
@@ -40,11 +44,12 @@ let currentQuestion = 0;
 
 let totalTime = 60;
 let timeInterval;
+let statusTimer; 
 
 //start the game
 START_BTN.addEventListener('click', function() {
   
-  showSection(QUIZ_SECTION);
+  showElement(SECTION_LIST, QUIZ_SECTION);
   
   displayTime();  
   displayQuestion();
@@ -55,22 +60,18 @@ START_BTN.addEventListener('click', function() {
 
     if (totalTime === 0) {
       clearInterval(timeInterval);
-      showSection(END_SECTION);
+      showElement(SECTION_LIST, END_SECTION);
     }
   }, 1000);
 });
 
-function showSection(SECTION) {
-  const sectionList = document.querySelector("main").children;
-  for (child of sectionList) {
-    if (child != SECTION) {
-      if (!child.classList.contains("hidden")) {
-        child.classList.add("hidden");
-      }
-    } else {
-      child.classList.remove("hidden");
+function showElement(siblingList, showElement) {
+  for (element of siblingList) {
+    if (!element.classList.contains("hidden")) {
+      element.classList.add("hidden");
     }
   }
+  showElement.classList.remove("hidden");
 } 
 
 function displayTime() {
@@ -79,7 +80,9 @@ function displayTime() {
 
 function displayQuestion() {
   CHOICES.innerHTML = "";
+
   QUESTION.textContent = QUESTION_LIST[currentQuestion].question;
+
   QUESTION_LIST[currentQuestion].choices.forEach(function(element, index) {
     const li = document.createElement("li");
     li.dataset.index = index;
@@ -91,49 +94,39 @@ function displayQuestion() {
 }
 
 CHOICES.addEventListener('click', function(event) {
+  clearTimeout(statusTimer);
+
   if (event.target.parentElement.dataset.index != QUESTION_LIST[currentQuestion].indexOfCorrectChoice) {
-    console.log(event.target.parentElement.dataset.index);
-    console.log(QUESTION_LIST[currentQuestion].indexOfCorrectChoice);
-    if (TIME_REMAINING.classList.contains("flash-red")) {
-      TIME_REMAINING.classList.remove("flash-red");
-    }
     totalTime -= 10;
-    TIME_REMAINING.classList.add("flash-red");
-    // CHOICE_STATUS.textContent = "Wrong!";
-    // STATUS_ICON.classList.add("fa-times-circle");
-    
+    displayTime();
 
-    setTimeout(function() {
-      TIME_REMAINING.classList.remove("flash-red");
-      // CHOICE_STATUS.textContent = "";
-      // STATUS_ICON.classList.remove("fa-times-circle");
-    }, 3000);
+    TIME_REMAINING.style.color = "#E81648";
+    showElement(STATUS_LIST, WRONG);
+
+    statusTimer = setTimeout(function() {
+      if (!WRONG.classList.contains("hidden")) {
+        WRONG.classList.add("hidden");
+      }
+      TIME_REMAINING.style.color = "#4616E8";
+    }, 1000);
   } else {
-    // CHOICE_STATUS.textContent = "Correct!";
-    // STATUS_ICON.classList.add("fa-check-circle");
+    showElement(STATUS_LIST, CORRECT);
 
-    setTimeout(function() {
-      // CHOICE_STATUS.textContent = "";
-      // STATUS_ICON.classList.remove("fa-check-circle");
-    }, 3000);
+    statusTimer = setTimeout(function() {
+      if (!CORRECT.classList.contains("hidden")){
+        CORRECT.classList.add("hidden");
+      }
+    }, 1000);
   }
+
   currentQuestion++;
   if (currentQuestion >= QUESTION_LIST.length) {
     clearInterval(timeInterval);
-    QUIZ_SECTION.classList.add("hidden");
-    END_SECTION.classList.remove("hidden");
+    showElement(SECTION_LIST, END_SECTION);
   } else {
     displayQuestion();
   }
 });
-  //timer starts
-  //display the question
-  //display the options
-
-//when user selects options
-  //go to next question
-  //if selection was wrong, deduct time, display "wrong" text
-  //if selection was correct, display "correct" text
 
 //if user makes it to end of questions with time left
 //or user runs out of time
