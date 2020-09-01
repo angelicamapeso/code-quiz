@@ -8,6 +8,13 @@ const TIME_REMAINING = document.getElementById("time-remaining");
 const CHOICES = document.getElementById("choices");
 const CHOICE_STATUS = document.getElementById("choice-status");
 
+//question object
+  //question
+  //array of answers
+  //index of correct answer
+
+//create array of questions
+
 //End
 const END_SECTION = document.getElementById("end");
 const SCORE = document.getElementById("score");
