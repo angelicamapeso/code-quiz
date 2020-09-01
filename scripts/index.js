@@ -41,23 +41,41 @@ let currentQuestion = 0;
 let totalTime = 60;
 let timeInterval;
 
-//when you press the start button
+//start the game
 START_BTN.addEventListener('click', function() {
-  START_SECTION.classList.add("hidden");
-  QUIZ_SECTION.classList.remove("hidden");
-
+  
+  showSection(QUIZ_SECTION);
+  
+  displayTime();  
   displayQuestion();
+  
   timeInterval = setInterval(function() {
     totalTime--;
-    TIME_REMAINING.textContent = totalTime;
+    displayTime();
+
     if (totalTime === 0) {
       clearInterval(timeInterval);
-      QUIZ_SECTION.classList.add("hidden");
-      END_SECTION.classList.remove("hidden");
+      showSection(END_SECTION);
     }
   }, 1000);
 });
 
+function showSection(SECTION) {
+  const sectionList = document.querySelector("main").children;
+  for (child of sectionList) {
+    if (child != SECTION) {
+      if (!child.classList.contains("hidden")) {
+        child.classList.add("hidden");
+      }
+    } else {
+      child.classList.remove("hidden");
+    }
+  }
+} 
+
+function displayTime() {
+  TIME_REMAINING.textContent = totalTime;
+}
 
 function displayQuestion() {
   CHOICES.innerHTML = "";
