@@ -1,3 +1,19 @@
+//Start
+const START_SECTION = document.getElementById("start");
+const START_BTN = document.getElementById("start");
+
+//Quiz questions
+const QUIZ_SECTION = document.getElementById("quiz-questions");
+const TIME_REMAINING = document.getElementById("time-remaining");
+const CHOICES = document.getElementById("choices");
+const CHOICE_STATUS = document.getElementById("choice-status");
+
+//End
+const END_SECTION = document.getElementById("end");
+const SCORE = document.getElementById("score");
+const INITIALS_INPUT = document.getElementById("initials");
+const SUBMIT_SCORE_BTN = document.getElementById("submit-score");
+
 //when you press the start button
   //timer starts
   //display the question
