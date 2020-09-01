@@ -126,20 +126,6 @@ main {
   font-size: 1.4em;
 }
 
-/*when an incorrect answer is entered*/
-.flash-red {
-  animation-name: flashRed;
-  animation-duration: 1s;
-  animation-iteration-count: 1;
-  animation-timing-function: ease-out;
-}
-
-@keyframes flashRed {
-  0% {color: #E81648;}
-  30% {color: #E81648;}
-  100% {color: #4616E8;}
-}
-
 .choice-status {
   border-top: 1px solid #CECECE;
   padding-top: 15px;
