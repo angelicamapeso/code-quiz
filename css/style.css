@@ -140,13 +140,20 @@ main {
   100% {color: #4616E8;}
 }
 
-#choice-status {
+.choice-status {
   border-top: 1px solid #CECECE;
   padding-top: 15px;
 
   font-size: 1.5em;
   font-weight: bold;
-  color: #4616E8;
+}
+
+#correct {
+ color:  #4616E8;
+}
+
+#wrong {
+  color: #E81648;
 }
 
 .fas {
