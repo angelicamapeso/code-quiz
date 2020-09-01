@@ -1,6 +1,6 @@
 //Start
 const START_SECTION = document.getElementById("start");
-const START_BTN = document.getElementById("start");
+const START_BTN = document.getElementById("start-button");
 
 //Quiz questions
 const QUIZ_SECTION = document.getElementById("quiz-questions");
