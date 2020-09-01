@@ -112,14 +112,14 @@ main {
 /*when an incorrect answer is entered*/
 .flash-red {
   animation-name: flashRed;
-  animation-duration: 0.5s;
+  animation-duration: 1s;
   animation-iteration-count: 1;
+  animation-timing-function: ease-out;
 }
 
 @keyframes flashRed {
-  0% {color: #4616E8;}
-  25% {color: #E81648;}
-  75% {color: #E81648;}
+  0% {color: #E81648;}
+  30% {color: #E81648;}
   100% {color: #4616E8;}
 }
 
@@ -129,7 +129,7 @@ main {
 
   font-size: 1.5em;
   font-weight: bold;
-  color: #E81648;
+  color: #4616E8;
 }
 
 .fas {
