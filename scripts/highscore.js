@@ -28,6 +28,10 @@ function updateTable() {
     
       HIGHSCORE_TABLE.appendChild(tableRow);
     });
+  } else {
+    while (HIGHSCORE_TABLE.children.length > 1) {
+      HIGHSCORE_TABLE.removeChild(HIGHSCORE_TABLE.lastChild);
+    }
   }
 }
 
