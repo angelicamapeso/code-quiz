@@ -19,7 +19,7 @@ const END_SECTION = document.getElementById("end");
 const END_TITLE = document.getElementById("end-title");
 const SCORE = document.getElementById("score");
 const INITIALS_INPUT = document.getElementById("initials");
-const SUBMIT_SCORE_BTN = document.getElementById("submit-score");
+const SUBMIT_SCORE = document.getElementById("submit-score");
 
 //Questions
 class Question {
@@ -49,7 +49,6 @@ let statusTimer;
 
 //start the game
 START_BTN.addEventListener('click', function() {
-  
   showElement(SECTION_LIST, QUIZ_SECTION);
   
   displayTime();  
@@ -146,6 +145,41 @@ function endGame() {
     END_TITLE.textContent = "Congratulations! You answered all the questions before your time ran out!";
   }
 }
+
+SUBMIT_SCORE.addEventListener('submit', function(event){
+  event.preventDefault();
+
+  //get the local storage highscore stuff
+  let currentScores = localStorage.getItem('scoreList');
+  if (currentScores) {
+    currentScores = JSON.parse(currentScores);
+    // console.log(currentScores);
+  } else {
+    currentScores = [];
+  }
+  //if there aint none, make a new array and push
+  const userScore = {
+    intials: INITIALS_INPUT.value,
+    score: totalTime,
+  }
+  
+  let userScoreIndex = currentScores.length;
+  if (currentScores.length > 0) {
+    for (let i = 0; i < currentScores.length; i++) {
+      if (currentScores[i].score <= userScore.score) {
+        userScoreIndex = i;
+        break;
+      }
+    } 
+  } 
+
+  currentScores.splice(userScoreIndex, 0, userScore);
+
+  localStorage.setItem('scoreList', JSON.stringify(currentScores));
+  
+  window.location.href= "./highscores.html";
+});
+
 
 
 
