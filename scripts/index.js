@@ -114,9 +114,7 @@ CHOICES.addEventListener('click', function(event) {
   styleTimeRemainingDefault();
 
   if (event.target.parentElement.dataset.index != QUESTION_LIST[currentQuestion].indexOfCorrectChoice) {
-    totalTime -= 10;
-    checkTime();
-    displayTime();
+    deductTimeBy(10);
 
     styleTimeRemainingWrong();
     showElement(CHOICE_STATUSES, WRONG);
@@ -140,6 +138,12 @@ CHOICES.addEventListener('click', function(event) {
     displayQuestion();
   }
 });
+
+function deductTimeBy(seconds) {
+  totalTime -= seconds;
+  checkTime();
+  displayTime();
+}
 
 function styleTimeRemainingDefault() {
   TIME_REMAINING.style.color = "#4616E8";
