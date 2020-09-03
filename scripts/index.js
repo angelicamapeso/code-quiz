@@ -10,7 +10,7 @@ const QUIZ_SECTION = document.getElementById("quiz-questions");
 const TIME_REMAINING = document.getElementById("time-remaining");
 const QUESTION = document.getElementById("question");
 const CHOICES = document.getElementById("choices");
-const STATUS_LIST = document.querySelectorAll(".choice-status");
+const CHOICE_STATUSES = document.querySelectorAll(".choice-status");
 const CORRECT = document.getElementById("correct");
 const WRONG = document.getElementById("wrong");
 
@@ -45,7 +45,7 @@ let currentQuestion = 0;
 
 let totalTime = 60;
 let timeInterval;
-let statusTimer; 
+let choiceStatusTimeout; 
 
 //start the game
 START_BTN.addEventListener('click', function() {
@@ -99,7 +99,7 @@ function displayQuestion() {
 }
 
 CHOICES.addEventListener('click', function(event) {
-  clearTimeout(statusTimer);
+  clearTimeout(choiceStatusTimeout);
   TIME_REMAINING.style.color = "#4616E8";
 
   if (event.target.parentElement.dataset.index != QUESTION_LIST[currentQuestion].indexOfCorrectChoice) {
@@ -108,18 +108,18 @@ CHOICES.addEventListener('click', function(event) {
     displayTime();
 
     TIME_REMAINING.style.color = "#E81648";
-    showElement(STATUS_LIST, WRONG);
+    showElement(CHOICE_STATUSES, WRONG);
 
-    statusTimer = setTimeout(function() {
+    choiceStatusTimeout = setTimeout(function() {
       if (!WRONG.classList.contains("hidden")) {
         WRONG.classList.add("hidden");
       }
       TIME_REMAINING.style.color = "#4616E8";
     }, 1000);
   } else {
-    showElement(STATUS_LIST, CORRECT);
+    showElement(CHOICE_STATUSES, CORRECT);
 
-    statusTimer = setTimeout(function() {
+    choiceStatusTimeout = setTimeout(function() {
       if (!CORRECT.classList.contains("hidden")){
         CORRECT.classList.add("hidden");
       }
