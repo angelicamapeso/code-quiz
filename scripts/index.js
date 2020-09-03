@@ -48,9 +48,12 @@ let totalTime = 60;
 let totalTimeInterval;
 let choiceStatusTimeout; 
 
-//start the game
+/******** EVENT LISTENERS ********/ 
 START_BTN.addEventListener('click', startGame);
+CHOICES.addEventListener('click', processChoice);
+SUBMIT_SCORE.addEventListener('submit', processInput);
 
+/******** START GAME ********/ 
 function startGame() {
   showElement(QUIZ_SECTIONS, QUIZ_SECTION);
   
@@ -60,6 +63,7 @@ function startGame() {
   startTimer();
 }
 
+/******** SHOWING/HIDING ELEMENTS ********/ 
 function showElement(siblingList, showElement) {
   for (element of siblingList) {
     hideElement(element);
@@ -73,6 +77,7 @@ function hideElement(element) {
   }
 }
 
+/******** TIME ********/ 
 function displayTime() {
   TIME_REMAINING.textContent = totalTime;
 }
@@ -93,6 +98,7 @@ function checkTime() {
   }
 }
 
+/******** QUESTIONS ********/ 
 function displayQuestion() {
   QUESTION.textContent = QUESTION_LIST[currentQuestion].question;
 
@@ -112,8 +118,7 @@ function displayChoiceList() {
   });
 }
 
-CHOICES.addEventListener('click', processChoice);
-
+//when user answers a question
 function processChoice(event) {
   const userChoice = parseInt(event.target.parentElement.dataset.index);
 
@@ -122,9 +127,18 @@ function processChoice(event) {
   getNextQuestion();
 }
 
+//Displaying choice statuses
 function resetChoiceStatusEffects() {
   clearTimeout(choiceStatusTimeout);
   styleTimeRemainingDefault();
+}
+
+function styleTimeRemainingDefault() {
+  TIME_REMAINING.style.color = "#4616E8";
+}
+
+function styleTimeRemainingWrong() {
+  TIME_REMAINING.style.color = "#E81648";
 }
 
 function checkChoice(userChoice) {
@@ -132,15 +146,6 @@ function checkChoice(userChoice) {
     displayCorrectChoiceEffects();
   } else {
     displayWrongChoiceEffects();
-  }
-}
-
-function getNextQuestion() {
-  currentQuestion++;
-  if (currentQuestion >= QUESTION_LIST.length) {
-    endGame();
-  } else {
-    displayQuestion();
   }
 }
 
@@ -160,6 +165,12 @@ function displayWrongChoiceEffects() {
   }, 1000);
 }
 
+function deductTimeBy(seconds) {
+  totalTime -= seconds;
+  checkTime();
+  displayTime();
+}
+
 function displayCorrectChoiceEffects() {
   showElement(CHOICE_STATUSES, CORRECT);
 
@@ -168,29 +179,26 @@ function displayCorrectChoiceEffects() {
   }, 1000);
 }
 
-function deductTimeBy(seconds) {
-  totalTime -= seconds;
-  checkTime();
-  displayTime();
+//Get next question
+function getNextQuestion() {
+  currentQuestion++;
+  if (currentQuestion >= QUESTION_LIST.length) {
+    endGame();
+  } else {
+    displayQuestion();
+  }
 }
 
-function styleTimeRemainingDefault() {
-  TIME_REMAINING.style.color = "#4616E8";
-}
-
-function styleTimeRemainingWrong() {
-  TIME_REMAINING.style.color = "#E81648";
-}
-
+/******** ENDING THE GAME ********/ 
 function endGame() {
   clearInterval(totalTimeInterval);
   
   showElement(QUIZ_SECTIONS, END_SECTION);
-  setScore();
+  displayScore();
   setEndHeading();
 }
 
-function setScore() {
+function displayScore() {
   SCORE.textContent = totalTime;
 }
 
@@ -202,8 +210,7 @@ function setEndHeading() {
   }
 }
 
-SUBMIT_SCORE.addEventListener('submit', processInput);
-
+/******** SUBMITTING INITIALS ********/ 
 function processInput(event) {
   event.preventDefault();
 
@@ -217,10 +224,12 @@ function processInput(event) {
   }
 }
 
-function saveHighscoreEntry(highscoreEntry) {
-  const currentScores = getScoreList();
-  placeEntryInHighscoreList(highscoreEntry, currentScores);
-  localStorage.setItem('scoreList', JSON.stringify(currentScores));
+function getNewHighscoreEntry(initials, score) {
+  const entry = {
+    intials: initials,
+    score: score,
+  }
+  return entry;
 }
 
 function isInputValid(initials) {
@@ -245,6 +254,21 @@ function displayFormError(errorMessage) {
   }
 }
 
+function saveHighscoreEntry(highscoreEntry) {
+  const currentScores = getScoreList();
+  placeEntryInHighscoreList(highscoreEntry, currentScores);
+  localStorage.setItem('scoreList', JSON.stringify(currentScores));
+}
+
+function getScoreList() {
+  const currentScores = localStorage.getItem('scoreList');
+  if (currentScores) {
+    return JSON.parse(currentScores);
+  } else {
+    return [];
+  }
+}
+
 function placeEntryInHighscoreList(newEntry, scoreList) {
   const newScoreIndex = getNewScoreIndex(newEntry, scoreList);
   scoreList.splice(newScoreIndex, 0, newEntry);
@@ -260,24 +284,3 @@ function getNewScoreIndex(newEntry, scoreList) {
   }
   return scoreList.length;
 }
-
-function getNewHighscoreEntry(initials, score) {
-  const entry = {
-    intials: initials,
-    score: score,
-  }
-  return entry;
-}
-
-function getScoreList() {
-  const currentScores = localStorage.getItem('scoreList');
-  if (currentScores) {
-    return JSON.parse(currentScores);
-  } else {
-    return [];
-  }
-}
-
-
-
-
