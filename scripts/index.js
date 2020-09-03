@@ -111,13 +111,15 @@ function displayChoiceList() {
   });
 }
 
-CHOICES.addEventListener('click', function(event) {
-  resetChoiceStatusEffects();
-  
+CHOICES.addEventListener('click', processChoice);
+
+function processChoice(event) {
   const userChoice = parseInt(event.target.parentElement.dataset.index);
+
+  resetChoiceStatusEffects();
   checkChoice(userChoice);
   getNextQuestion();
-});
+}
 
 function resetChoiceStatusEffects() {
   clearTimeout(choiceStatusTimeout);
@@ -126,9 +128,9 @@ function resetChoiceStatusEffects() {
 
 function checkChoice(userChoice) {
   if (isChoiceCorrect(userChoice)) {
-    correctChoiceMade();
+    displayCorrectChoiceEffects();
   } else {
-    wrongChoiceMade();
+    displayWrongChoiceEffects();
   }
 }
 
@@ -145,7 +147,7 @@ function isChoiceCorrect(choice) {
   return choice === QUESTION_LIST[currentQuestion].indexOfCorrectChoice;
 }
 
-function wrongChoiceMade() {
+function displayWrongChoiceEffects() {
   deductTimeBy(10);
 
   styleTimeRemainingWrong();
@@ -157,7 +159,7 @@ function wrongChoiceMade() {
   }, 1000);
 }
 
-function correctChoiceMade() {
+function displayCorrectChoiceEffects() {
   showElement(CHOICE_STATUSES, CORRECT);
 
   choiceStatusTimeout = setTimeout(function() {
