@@ -114,21 +114,9 @@ CHOICES.addEventListener('click', function(event) {
   styleTimeRemainingDefault();
 
   if (event.target.parentElement.dataset.index != QUESTION_LIST[currentQuestion].indexOfCorrectChoice) {
-    deductTimeBy(10);
-
-    styleTimeRemainingWrong();
-    showElement(CHOICE_STATUSES, WRONG);
-
-    choiceStatusTimeout = setTimeout(function() {
-      hideElement(WRONG);
-      styleTimeRemainingDefault();
-    }, 1000);
+    displayWrongChoiceStatus();
   } else {
-    showElement(CHOICE_STATUSES, CORRECT);
-
-    choiceStatusTimeout = setTimeout(function() {
-      hideElement(CORRECT);
-    }, 1000);
+    displayCorrectChoiceStatus();
   }
 
   currentQuestion++;
@@ -138,6 +126,26 @@ CHOICES.addEventListener('click', function(event) {
     displayQuestion();
   }
 });
+
+function displayWrongChoiceStatus() {
+  deductTimeBy(10);
+
+  styleTimeRemainingWrong();
+  showElement(CHOICE_STATUSES, WRONG);
+
+  choiceStatusTimeout = setTimeout(function() {
+    hideElement(WRONG);
+    styleTimeRemainingDefault();
+  }, 1000);
+}
+
+function displayCorrectChoiceStatus() {
+  showElement(CHOICE_STATUSES, CORRECT);
+
+  choiceStatusTimeout = setTimeout(function() {
+    hideElement(CORRECT);
+  }, 1000);
+}
 
 function deductTimeBy(seconds) {
   totalTime -= seconds;
