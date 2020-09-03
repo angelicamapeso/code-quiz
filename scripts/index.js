@@ -48,14 +48,16 @@ let totalTimeInterval;
 let choiceStatusTimeout; 
 
 //start the game
-START_BTN.addEventListener('click', function() {
+START_BTN.addEventListener('click', startGame);
+
+function startGame() {
   showElement(SECTION_LIST, QUIZ_SECTION);
   
   displayTime();  
   displayQuestion();
 
   startTimer();
-});
+}
 
 function showElement(siblingList, showElement) {
   for (element of siblingList) {
