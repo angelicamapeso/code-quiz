@@ -218,20 +218,19 @@ SUBMIT_SCORE.addEventListener('submit', function(event){
 });
 
 function placeEntryInHighscoreList(entry, scoreList) {
-  let userScoreIndex = scoreList.length;
-  if (scoreList.length > 0) {
-    for (let i = 0; i < scoreList.length; i++) {
-      if (scoreList[i].score <= entry.score) {
-        userScoreIndex = i;
-        break;
-      }
-    } 
-  }
+  const userScoreIndex = getNewScoreIndex(entry.score, scoreList);
   scoreList.splice(userScoreIndex, 0, entry);
 }
 
-function getNewUserScoreIndex(score, scoreListLength) {
-
+function getNewScoreIndex(newScore, scoreList) {
+  if (scoreList.length > 0) {
+    for (let i = 0; i < scoreList.length; i++) {
+      if (scoreList[i].score <= newScore) {
+        return i;
+      }
+    } 
+  }
+  return scoreList.length;
 }
 
 function getNewHighscoreEntry() {
