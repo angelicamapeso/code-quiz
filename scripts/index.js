@@ -53,13 +53,8 @@ START_BTN.addEventListener('click', function() {
   
   displayTime();  
   displayQuestion();
-  
-  timeInterval = setInterval(function() {
-    totalTime--;
-    displayTime();
-    checkTime();
 
-  }, 1000);
+  startTimer();
 });
 
 function showElement(siblingList, showElement) {
@@ -73,6 +68,15 @@ function showElement(siblingList, showElement) {
 
 function displayTime() {
   TIME_REMAINING.textContent = totalTime;
+}
+
+function startTimer() {
+  timeInterval = setInterval(function() {
+    totalTime--;
+    displayTime();
+    checkTime();
+
+  }, 1000);
 }
 
 function checkTime() {
