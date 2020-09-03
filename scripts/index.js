@@ -111,19 +111,19 @@ function displayChoiceList() {
 
 CHOICES.addEventListener('click', function(event) {
   clearTimeout(choiceStatusTimeout);
-  TIME_REMAINING.style.color = "#4616E8";
+  styleTimeRemainingDefault();
 
   if (event.target.parentElement.dataset.index != QUESTION_LIST[currentQuestion].indexOfCorrectChoice) {
     totalTime -= 10;
     checkTime();
     displayTime();
 
-    TIME_REMAINING.style.color = "#E81648";
+    styleTimeRemainingWrong();
     showElement(CHOICE_STATUSES, WRONG);
 
     choiceStatusTimeout = setTimeout(function() {
       hideElement(WRONG);
-      TIME_REMAINING.style.color = "#4616E8";
+      styleTimeRemainingDefault();
     }, 1000);
   } else {
     showElement(CHOICE_STATUSES, CORRECT);
@@ -140,6 +140,14 @@ CHOICES.addEventListener('click', function(event) {
     displayQuestion();
   }
 });
+
+function styleTimeRemainingDefault() {
+  TIME_REMAINING.style.color = "#4616E8";
+}
+
+function styleTimeRemainingWrong() {
+  TIME_REMAINING.style.color = "#E81648";
+}
 
 function endGame() {
   clearInterval(totalTimeInterval);
