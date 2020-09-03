@@ -34,6 +34,11 @@ h1 {
   font-size: 2em;
 }
 
+/*Icons*/
+.fas {
+  margin-right: 10px;
+}
+
 /*Clickable*/
 a {
   color: #4616E8;
@@ -129,7 +134,6 @@ main {
 
 #time-remaining{
   color: #4616E8;
-  /* font-size: 1.4em; */
 }
 
 #choices {
@@ -154,10 +158,6 @@ main {
   color: #E81648;
 }
 
-.fas {
-  margin-right: 10px;
-}
-
 /*gray line before choice status*/
 #quiz-questions, 
 #end {
@@ -176,11 +176,11 @@ main {
 }
 
 /*form*/
-form {
+#submit-score {
   margin-bottom: 10px;
 }
 
-form label {
+#submit-score label {
   display: block;
 }
 
@@ -194,10 +194,6 @@ form label {
 /*****Highscores*****/
 table {
   border-spacing: 0 0.5em;
-}
-
-tr:first-child {
-  margin-bottom: 5px;
 }
 
 tr:nth-child(even) {
