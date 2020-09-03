@@ -191,6 +191,11 @@ main {
   box-sizing: border-box;
 }
 
+#error-message {
+  color: red;
+  margin-top: 5px;
+}
+
 /*****Highscores*****/
 table {
   border-spacing: 0 0.5em;
