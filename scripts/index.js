@@ -122,9 +122,9 @@ CHOICES.addEventListener('click', function(event) {
 
 function checkChoice(userChoice) {
   if (isChoiceCorrect(userChoice)) {
-    displayCorrectChoiceStatus();
+    correctChoiceMade();
   } else {
-    displayWrongChoiceStatus();
+    wrongChoiceMade();
   }
 }
 
@@ -141,7 +141,7 @@ function isChoiceCorrect(choice) {
   return choice === QUESTION_LIST[currentQuestion].indexOfCorrectChoice;
 }
 
-function displayWrongChoiceStatus() {
+function wrongChoiceMade() {
   deductTimeBy(10);
 
   styleTimeRemainingWrong();
@@ -153,7 +153,7 @@ function displayWrongChoiceStatus() {
   }, 1000);
 }
 
-function displayCorrectChoiceStatus() {
+function correctChoiceMade() {
   showElement(CHOICE_STATUSES, CORRECT);
 
   choiceStatusTimeout = setTimeout(function() {
