@@ -209,16 +209,15 @@ SUBMIT_SCORE.addEventListener('submit', function(event){
   const score = totalTime;
 
   if (isInputValid(initials)) {
-    saveHighscoreEntry(initials, score);
+    const highscoreEntry = getNewHighscoreEntry(initials, score);
+    saveHighscoreEntry(highscoreEntry);
     window.location.href= "./highscores.html";
   }
 });
 
-function saveHighscoreEntry(initials, score) {
+function saveHighscoreEntry(highscoreEntry) {
   const currentScores = getScoreList();
-  const highscoreEntry = getNewHighscoreEntry(initials, score);
   placeEntryInHighscoreList(highscoreEntry, currentScores);
-  
   localStorage.setItem('scoreList', JSON.stringify(currentScores));
 }
 
