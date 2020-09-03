@@ -1,5 +1,5 @@
 //Section list
-const SECTION_LIST = document.querySelectorAll("section");
+const SECTION_LIST = document.querySelectorAll(".quiz-section");
 
 //Start
 const START_SECTION = document.getElementById("start");
