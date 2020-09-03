@@ -202,18 +202,20 @@ function setEndHeading() {
   }
 }
 
-SUBMIT_SCORE.addEventListener('submit', function(event){
+SUBMIT_SCORE.addEventListener('submit', processInput);
+
+function processInput(event) {
   event.preventDefault();
 
   const initials = INITIALS_INPUT.value.toUpperCase();
-  const score = totalTime;
 
   if (isInputValid(initials)) {
+    const score = totalTime;
     const highscoreEntry = getNewHighscoreEntry(initials, score);
     saveHighscoreEntry(highscoreEntry);
     window.location.href= "./highscores.html";
   }
-});
+}
 
 function saveHighscoreEntry(highscoreEntry) {
   const currentScores = getScoreList();
