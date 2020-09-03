@@ -1,5 +1,5 @@
 //Section list
-const SECTION_LIST = document.querySelectorAll(".quiz-section");
+const QUIZ_SECTIONS = document.querySelectorAll(".quiz-section");
 
 //Start
 const START_SECTION = document.getElementById("start");
@@ -51,7 +51,7 @@ let choiceStatusTimeout;
 START_BTN.addEventListener('click', startGame);
 
 function startGame() {
-  showElement(SECTION_LIST, QUIZ_SECTION);
+  showElement(QUIZ_SECTIONS, QUIZ_SECTION);
   
   displayTime();  
   displayQuestion();
@@ -165,7 +165,7 @@ function styleTimeRemainingWrong() {
 
 function endGame() {
   clearInterval(totalTimeInterval);
-  showElement(SECTION_LIST, END_SECTION);
+  showElement(QUIZ_SECTIONS, END_SECTION);
   SCORE.textContent = totalTime;
 
   if (totalTime === 0) {
