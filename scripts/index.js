@@ -116,20 +116,26 @@ CHOICES.addEventListener('click', function(event) {
   styleTimeRemainingDefault();
 
   const userChoice = parseInt(event.target.parentElement.dataset.index);
+  checkChoice(userChoice);
+  getNextQuestion();
+});
 
+function checkChoice(userChoice) {
   if (isChoiceCorrect(userChoice)) {
     displayCorrectChoiceStatus();
   } else {
     displayWrongChoiceStatus();
   }
+}
 
+function getNextQuestion() {
   currentQuestion++;
   if (currentQuestion >= QUESTION_LIST.length) {
     endGame();
   } else {
     displayQuestion();
   }
-});
+}
 
 function isChoiceCorrect(choice) {
   return choice === QUESTION_LIST[currentQuestion].indexOfCorrectChoice;
