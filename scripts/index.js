@@ -59,12 +59,16 @@ START_BTN.addEventListener('click', function() {
 
 function showElement(siblingList, showElement) {
   for (element of siblingList) {
-    if (!element.classList.contains("hidden")) {
-      element.classList.add("hidden");
-    }
+    hideElement(element);
   }
   showElement.classList.remove("hidden");
 } 
+
+function hideElement(element) {
+  if (!element.classList.contains("hidden")) {
+    element.classList.add("hidden");
+  }
+}
 
 function displayTime() {
   TIME_REMAINING.textContent = totalTime;
@@ -118,18 +122,14 @@ CHOICES.addEventListener('click', function(event) {
     showElement(CHOICE_STATUSES, WRONG);
 
     choiceStatusTimeout = setTimeout(function() {
-      if (!WRONG.classList.contains("hidden")) {
-        WRONG.classList.add("hidden");
-      }
+      hideElement(WRONG);
       TIME_REMAINING.style.color = "#4616E8";
     }, 1000);
   } else {
     showElement(CHOICE_STATUSES, CORRECT);
 
     choiceStatusTimeout = setTimeout(function() {
-      if (!CORRECT.classList.contains("hidden")){
-        CORRECT.classList.add("hidden");
-      }
+      hideElement(CORRECT);
     }, 1000);
   }
 
