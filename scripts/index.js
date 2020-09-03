@@ -183,15 +183,24 @@ function styleTimeRemainingWrong() {
 
 function endGame() {
   clearInterval(totalTimeInterval);
+  
   showElement(QUIZ_SECTIONS, END_SECTION);
-  SCORE.textContent = totalTime;
+  setScore();
+  setEndHeading();
+}
 
+function setScore() {
+  SCORE.textContent = totalTime;
+}
+
+function setEndHeading() {
   if (totalTime === 0) {
     END_TITLE.textContent = "Sorry! You ran out of time!";
   } else {
     END_TITLE.textContent = "Congratulations! You answered all the questions before your time ran out!";
   }
 }
+
 
 
 SUBMIT_SCORE.addEventListener('submit', function(event){
