@@ -106,7 +106,7 @@ function displayChoiceList() {
 }
 
 CHOICES.addEventListener('click', function(event) {
-  clearChoiceStatusTimeout();
+  clearTimeout(choiceStatusTimeout);
   TIME_REMAINING.style.color = "#4616E8";
 
   if (event.target.parentElement.dataset.index != QUESTION_LIST[currentQuestion].indexOfCorrectChoice) {
@@ -141,12 +141,8 @@ CHOICES.addEventListener('click', function(event) {
   }
 });
 
-function clearChoiceStatusTimeout() {
-  clearTimeout(choiceStatusTimeout);
-}
-
 function endGame() {
-  clearTotalTimeInterval();
+  clearInterval(totalTimeInterval);
   showElement(SECTION_LIST, END_SECTION);
   SCORE.textContent = totalTime;
 
@@ -157,9 +153,6 @@ function endGame() {
   }
 }
 
-function clearTotalTimeInterval() {
-  clearInterval(totalTimeInterval);
-}
 
 SUBMIT_SCORE.addEventListener('submit', function(event){
   event.preventDefault();
