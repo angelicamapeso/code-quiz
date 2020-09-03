@@ -112,13 +112,17 @@ function displayChoiceList() {
 }
 
 CHOICES.addEventListener('click', function(event) {
-  clearTimeout(choiceStatusTimeout);
-  styleTimeRemainingDefault();
-
+  resetChoiceStatusEffects();
+  
   const userChoice = parseInt(event.target.parentElement.dataset.index);
   checkChoice(userChoice);
   getNextQuestion();
 });
+
+function resetChoiceStatusEffects() {
+  clearTimeout(choiceStatusTimeout);
+  styleTimeRemainingDefault();
+}
 
 function checkChoice(userChoice) {
   if (isChoiceCorrect(userChoice)) {
