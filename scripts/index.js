@@ -208,29 +208,39 @@ SUBMIT_SCORE.addEventListener('submit', function(event){
 
   //get the local storage highscore stuff
   let currentScores = getScoreList();
-  
+  const highscoreEntry = getNewHighscoreEntry();
+  placeEntryInHighscoreList(highscoreEntry, currentScores);
   //if there aint none, make a new array and push
-  const userScore = {
-    intials: INITIALS_INPUT.value,
-    score: totalTime,
-  }
-  
-  let userScoreIndex = currentScores.length;
-  if (currentScores.length > 0) {
-    for (let i = 0; i < currentScores.length; i++) {
-      if (currentScores[i].score <= userScore.score) {
-        userScoreIndex = i;
-        break;
-      }
-    } 
-  } 
-
-  currentScores.splice(userScoreIndex, 0, userScore);
 
   localStorage.setItem('scoreList', JSON.stringify(currentScores));
   
   window.location.href= "./highscores.html";
 });
+
+function placeEntryInHighscoreList(entry, scoreList) {
+  let userScoreIndex = scoreList.length;
+  if (scoreList.length > 0) {
+    for (let i = 0; i < scoreList.length; i++) {
+      if (scoreList[i].score <= entry.score) {
+        userScoreIndex = i;
+        break;
+      }
+    } 
+  }
+  scoreList.splice(userScoreIndex, 0, entry);
+}
+
+function getNewUserScoreIndex(score, scoreListLength) {
+
+}
+
+function getNewHighscoreEntry() {
+  const entry = {
+    intials: INITIALS_INPUT.value,
+    score: totalTime,
+  }
+  return entry;
+}
 
 function getScoreList() {
   const currentScores = localStorage.getItem('scoreList');
