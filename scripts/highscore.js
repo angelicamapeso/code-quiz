@@ -2,6 +2,10 @@
 const HIGHSCORE_TABLE = document.getElementById("highscores-table");
 const CLEAR_HIGHSCORE_BTN = document.getElementById("clear-highscores");
 
+//Event listener
+CLEAR_HIGHSCORE_BTN.addEventListener('click', clearHighscores);
+
+//Loads table when page loaded
 generateHighscoresTable();
 
 function generateHighscoresTable() {
@@ -11,6 +15,7 @@ function generateHighscoresTable() {
   } 
 }
 
+//Highscore table generation
 function addHighscoreTableRows(highscores) {
   highscores = JSON.parse(highscores);
 
@@ -49,8 +54,7 @@ function createHighscoreTableRow(rankCell, scoreCell, initialsCell) {
   return tableRow;
 }
 
-CLEAR_HIGHSCORE_BTN.addEventListener('click', clearHighscores);
-
+//Clear table
 function clearHighscores() {
   localStorage.setItem('scoreList', []);
   while (HIGHSCORE_TABLE.children.length > 1) {
