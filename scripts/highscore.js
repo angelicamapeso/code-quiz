@@ -2,41 +2,58 @@
 const HIGHSCORE_TABLE = document.getElementById("highscores-table");
 const CLEAR_HIGHSCORE_BTN = document.getElementById("clear-highscores");
 
-updateTable();
+generateHighscoresTable();
 
-function updateTable() {
+function generateHighscoresTable() {
   let highscores = localStorage.getItem("scoreList");
-
   if (highscores) {
-    highscores = JSON.parse(highscores);
-
-    highscores.forEach(function(scoreItem, index) {
-      const tableRow = document.createElement('tr');
-    
-      const rank = document.createElement('td');
-      rank.textContent = `#${index + 1}`;
-    
-      const score = document.createElement('td');
-      score.textContent = scoreItem.score;
-    
-      const initials = document.createElement('td');
-      initials.textContent = scoreItem.intials;
-    
-      tableRow.appendChild(rank);
-      tableRow.appendChild(score);
-      tableRow.appendChild(initials);
-    
-      HIGHSCORE_TABLE.appendChild(tableRow);
-    });
-  } else {
-    while (HIGHSCORE_TABLE.children.length > 1) {
-      HIGHSCORE_TABLE.removeChild(HIGHSCORE_TABLE.lastChild);
-    }
-  }
+    addHighscoreTableRows(highscores);
+  } 
 }
 
-CLEAR_HIGHSCORE_BTN.addEventListener('click', function(){
-  let emptyHighscores = [];
-  localStorage.setItem('scoreList', emptyHighscores);
-  updateTable();
-});
+function addHighscoreTableRows(highscores) {
+  highscores = JSON.parse(highscores);
+
+  highscores.forEach(function(scoreItem, index) {
+    const rankCell = createRankCell(index + 1);
+    const scoreCell = createScoreCell(scoreItem.score);
+    const initialsCell = createInitialsCell(scoreItem.initials);
+    const highscoreTableRow = createHighscoreTableRow(rankCell, scoreCell, initialsCell);
+    HIGHSCORE_TABLE.appendChild(highscoreTableRow);
+  });
+}
+
+function createRankCell(rank) {
+  const rankCell = document.createElement('td');
+  rankCell.textContent = `#${rank}`;
+  return rankCell;
+}
+
+function createScoreCell(score) {
+  const scoreCell = document.createElement('td');
+  scoreCell.textContent = score;
+  return scoreCell;
+}
+
+function createInitialsCell(initials) {
+  const initialsCell = document.createElement('td');
+  initialsCell.textContent = initials;
+  return initialsCell;
+}
+
+function createHighscoreTableRow(rankCell, scoreCell, initialsCell) {
+  const tableRow = document.createElement('tr');
+  tableRow.appendChild(rankCell);
+  tableRow.appendChild(scoreCell);
+  tableRow.appendChild(initialsCell);
+  return tableRow;
+}
+
+CLEAR_HIGHSCORE_BTN.addEventListener('click', clearHighscores);
+
+function clearHighscores() {
+  localStorage.setItem('scoreList', []);
+  while (HIGHSCORE_TABLE.children.length > 1) {
+    HIGHSCORE_TABLE.removeChild(HIGHSCORE_TABLE.lastChild);
+  }
+}
