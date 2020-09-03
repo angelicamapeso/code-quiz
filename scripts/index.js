@@ -62,14 +62,6 @@ START_BTN.addEventListener('click', function() {
   }, 1000);
 });
 
-function checkTime() {
-  if (totalTime <= 0) {
-    clearInterval(timeInterval);
-    totalTime = 0;
-    endGame();
-  }
-}
-
 function showElement(siblingList, showElement) {
   for (element of siblingList) {
     if (!element.classList.contains("hidden")) {
@@ -81,6 +73,14 @@ function showElement(siblingList, showElement) {
 
 function displayTime() {
   TIME_REMAINING.textContent = totalTime;
+}
+
+function checkTime() {
+  if (totalTime <= 0) {
+    clearInterval(timeInterval);
+    totalTime = 0;
+    endGame();
+  }
 }
 
 function displayQuestion() {
