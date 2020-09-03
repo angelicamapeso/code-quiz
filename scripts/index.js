@@ -205,23 +205,44 @@ function setEndHeading() {
 SUBMIT_SCORE.addEventListener('submit', function(event){
   event.preventDefault();
 
-  const input = INITIALS_INPUT.value.toUpperCase();
-  //input validation
-  if (input === "") {
-    ERROR_MESSAGE.textContent = "You can't submit empty initials!";
-    INITIALS_INPUT.classList.add("error");
-  } else if (input.match(/[^a-z]/ig)) {
-    ERROR_MESSAGE.textContent = "Initials may only include letters."
-  } else {
-  const currentScores = getScoreList();
-  const highscoreEntry = getNewHighscoreEntry();
-  placeEntryInHighscoreList(highscoreEntry, currentScores);
+  const initials = INITIALS_INPUT.value.toUpperCase();
+  const score = totalTime;
 
-  localStorage.setItem('scoreList', JSON.stringify(currentScores));
-  
-  window.location.href= "./highscores.html";
+  if (isInputValid(initials)) {
+    saveHighscoreEntry(initials, score);
+    window.location.href= "./highscores.html";
   }
 });
+
+function saveHighscoreEntry(initials, score) {
+  const currentScores = getScoreList();
+  const highscoreEntry = getNewHighscoreEntry(initials, score);
+  placeEntryInHighscoreList(highscoreEntry, currentScores);
+  
+  localStorage.setItem('scoreList', JSON.stringify(currentScores));
+}
+
+function isInputValid(initials) {
+  let errorMessage = "";
+  if (initials === "") {
+    errorMessage = "You can't submit empty initials!";
+    displayFormError(errorMessage);
+    return false;
+  } else if (initials.match(/[^a-z]/ig)) {
+    errorMessage = "Initials may only include letters."
+    displayFormError(errorMessage);
+    return false;
+  } else {
+    return true;
+  }
+}
+
+function displayFormError(errorMessage) {
+  ERROR_MESSAGE.textContent = errorMessage;
+  if (!INITIALS_INPUT.classList.contains("error")) {
+    INITIALS_INPUT.classList.add("error");
+  }
+}
 
 function placeEntryInHighscoreList(newEntry, scoreList) {
   const newScoreIndex = getNewScoreIndex(newEntry, scoreList);
@@ -239,10 +260,10 @@ function getNewScoreIndex(newEntry, scoreList) {
   return scoreList.length;
 }
 
-function getNewHighscoreEntry() {
+function getNewHighscoreEntry(initials, score) {
   const entry = {
-    intials: INITIALS_INPUT.value,
-    score: totalTime,
+    intials: initials,
+    score: score,
   }
   return entry;
 }
