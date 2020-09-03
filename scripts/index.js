@@ -217,15 +217,15 @@ SUBMIT_SCORE.addEventListener('submit', function(event){
   window.location.href= "./highscores.html";
 });
 
-function placeEntryInHighscoreList(entry, scoreList) {
-  const userScoreIndex = getNewScoreIndex(entry.score, scoreList);
-  scoreList.splice(userScoreIndex, 0, entry);
+function placeEntryInHighscoreList(newEntry, scoreList) {
+  const newScoreIndex = getNewScoreIndex(newEntry, scoreList);
+  scoreList.splice(newScoreIndex, 0, newEntry);
 }
 
-function getNewScoreIndex(newScore, scoreList) {
+function getNewScoreIndex(newEntry, scoreList) {
   if (scoreList.length > 0) {
     for (let i = 0; i < scoreList.length; i++) {
-      if (scoreList[i].score <= newScore) {
+      if (scoreList[i].score <= newEntry.score) {
         return i;
       }
     } 
