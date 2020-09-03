@@ -115,10 +115,12 @@ CHOICES.addEventListener('click', function(event) {
   clearTimeout(choiceStatusTimeout);
   styleTimeRemainingDefault();
 
-  if (event.target.parentElement.dataset.index != QUESTION_LIST[currentQuestion].indexOfCorrectChoice) {
-    displayWrongChoiceStatus();
-  } else {
+  const userChoice = parseInt(event.target.parentElement.dataset.index);
+
+  if (isChoiceCorrect(userChoice)) {
     displayCorrectChoiceStatus();
+  } else {
+    displayWrongChoiceStatus();
   }
 
   currentQuestion++;
@@ -128,6 +130,10 @@ CHOICES.addEventListener('click', function(event) {
     displayQuestion();
   }
 });
+
+function isChoiceCorrect(choice) {
+  return choice === QUESTION_LIST[currentQuestion].indexOfCorrectChoice;
+}
 
 function displayWrongChoiceStatus() {
   deductTimeBy(10);
