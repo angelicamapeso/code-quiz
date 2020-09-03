@@ -44,7 +44,7 @@ const QUESTION_LIST = [QUESTION_1, QUESTION_2, QUESTION_3, QUESTION_4, QUESTION_
 let currentQuestion = 0;
 
 let totalTime = 60;
-let timeInterval;
+let totalTimeInterval;
 let choiceStatusTimeout; 
 
 //start the game
@@ -71,7 +71,7 @@ function displayTime() {
 }
 
 function startTimer() {
-  timeInterval = setInterval(function() {
+  totalTimeInterval = setInterval(function() {
     totalTime--;
     displayTime();
     checkTime();
@@ -81,7 +81,6 @@ function startTimer() {
 
 function checkTime() {
   if (totalTime <= 0) {
-    clearInterval(timeInterval);
     totalTime = 0;
     endGame();
   }
@@ -107,7 +106,7 @@ function displayChoiceList() {
 }
 
 CHOICES.addEventListener('click', function(event) {
-  clearTimeout(choiceStatusTimeout);
+  clearChoiceStatusTimeout();
   TIME_REMAINING.style.color = "#4616E8";
 
   if (event.target.parentElement.dataset.index != QUESTION_LIST[currentQuestion].indexOfCorrectChoice) {
@@ -136,14 +135,18 @@ CHOICES.addEventListener('click', function(event) {
 
   currentQuestion++;
   if (currentQuestion >= QUESTION_LIST.length) {
-    clearInterval(timeInterval);
     endGame();
   } else {
     displayQuestion();
   }
 });
 
+function clearChoiceStatusTimeout() {
+  clearTimeout(choiceStatusTimeout);
+}
+
 function endGame() {
+  clearTotalTimeInterval();
   showElement(SECTION_LIST, END_SECTION);
   SCORE.textContent = totalTime;
 
@@ -152,6 +155,10 @@ function endGame() {
   } else {
     END_TITLE.textContent = "Congratulations! You answered all the questions before your time ran out!";
   }
+}
+
+function clearTotalTimeInterval() {
+  clearInterval(totalTimeInterval);
 }
 
 SUBMIT_SCORE.addEventListener('submit', function(event){
