@@ -84,15 +84,19 @@ function displayTime() {
 }
 
 function displayQuestion() {
-  CHOICES.innerHTML = "";
-
   QUESTION.textContent = QUESTION_LIST[currentQuestion].question;
 
-  QUESTION_LIST[currentQuestion].choices.forEach(function(element, index) {
+  displayChoiceList();
+}
+
+function displayChoiceList() {
+  CHOICES.innerHTML = "";
+
+  QUESTION_LIST[currentQuestion].choices.forEach(function(answer, index) {
     const li = document.createElement("li");
     li.dataset.index = index;
     const button = document.createElement("button");
-    button.textContent = (index + 1) + ". " + element;
+    button.textContent = (index + 1) + ". " + answer;
     li.appendChild(button);
     CHOICES.appendChild(li);
   });
