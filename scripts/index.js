@@ -201,19 +201,14 @@ function setEndHeading() {
   }
 }
 
-
-
 SUBMIT_SCORE.addEventListener('submit', function(event){
   event.preventDefault();
 
+  //input validation
+
   //get the local storage highscore stuff
-  let currentScores = localStorage.getItem('scoreList');
-  if (currentScores) {
-    currentScores = JSON.parse(currentScores);
-    // console.log(currentScores);
-  } else {
-    currentScores = [];
-  }
+  let currentScores = getScoreList();
+  
   //if there aint none, make a new array and push
   const userScore = {
     intials: INITIALS_INPUT.value,
@@ -237,6 +232,14 @@ SUBMIT_SCORE.addEventListener('submit', function(event){
   window.location.href= "./highscores.html";
 });
 
+function getScoreList() {
+  const currentScores = localStorage.getItem('scoreList');
+  if (currentScores) {
+    return JSON.parse(currentScores);
+  } else {
+    return [];
+  }
+}
 
 
 
