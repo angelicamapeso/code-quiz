@@ -18,7 +18,7 @@
       </nav>
     </header>
     <main>
-      <section id="start" class="quiz-section hidden">
+      <section id="start" class="quiz-section">
         <h1>Coding Quiz Challenge</h1>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
           Mollitia eum voluptatem velit enim, nostrum temporibus eligendi ipsa commodi veritatis, 
@@ -32,14 +32,14 @@
         <h1 id="question">Quiz Question</h1>
         <ul id="choices"></ul>
       </section>
-      <section id="end" class="quiz-section">
+      <section id="end" class="quiz-section hidden">
         <h1 id="end-title">Quiz completed</h1>
         <p id="score-text">Your score is: <span id="score">0</span></p>
         <form id="submit-score">
           <label for="initials">Enter initials:</label>
           <input type="text" id="initials">
           <button type="submit">Submit</button>
-          <p id="error-message">You can't submit empty initials!</p>
+          <p id="error-message"></p>
         </form>
         <a href="index.html" class="back-button"><i class="fas fa-angle-left" aria-hidden="true"></i>Back to quiz</a>
       </section>

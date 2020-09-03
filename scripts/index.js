@@ -20,6 +20,7 @@ const END_TITLE = document.getElementById("end-title");
 const SCORE = document.getElementById("score");
 const INITIALS_INPUT = document.getElementById("initials");
 const SUBMIT_SCORE = document.getElementById("submit-score");
+const ERROR_MESSAGE = document.getElementById("error-message");
 
 //Questions
 class Question {
@@ -204,17 +205,22 @@ function setEndHeading() {
 SUBMIT_SCORE.addEventListener('submit', function(event){
   event.preventDefault();
 
+  const input = INITIALS_INPUT.value.toUpperCase();
   //input validation
-
-  //get the local storage highscore stuff
-  let currentScores = getScoreList();
+  if (input === "") {
+    ERROR_MESSAGE.textContent = "You can't submit empty initials!";
+    INITIALS_INPUT.classList.add("error");
+  } else if (input.match(/[^a-z]/ig)) {
+    ERROR_MESSAGE.textContent = "Initials may only include letters."
+  } else {
+  const currentScores = getScoreList();
   const highscoreEntry = getNewHighscoreEntry();
   placeEntryInHighscoreList(highscoreEntry, currentScores);
-  //if there aint none, make a new array and push
 
   localStorage.setItem('scoreList', JSON.stringify(currentScores));
   
   window.location.href= "./highscores.html";
+  }
 });
 
 function placeEntryInHighscoreList(newEntry, scoreList) {
