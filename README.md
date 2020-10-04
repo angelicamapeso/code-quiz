@@ -1,7 +1,12 @@
 # Bootcamp - Homework 4: Code Quiz
+
+![Code quiz website preview](./images/code_quiz_preview.png)
+
 This website is a timed quiz on JavaScript. 
 
 Like other bootcamp assignments, a user story and acceptance criteria were provided; however, no starter code was provided. 
+
+:link: [JavaScript Code Quiz Website](https://angelicamapeso.github.io/bootcamp-code-quiz/)
 
 ## The Rules
 - The quiz is made up of 5 questions presented one at a time
